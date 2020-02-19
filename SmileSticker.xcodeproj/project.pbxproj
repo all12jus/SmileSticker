@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D08DD4E123FDDF30004D21FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D08DD4E023FDDF30004D21FD /* Assets.xcassets */; };
+		D08DD4E823FDDF30004D21FD /* SmileSticker MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D08DD4E723FDDF30004D21FD /* SmileSticker MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D08DD4ED23FDDF30004D21FD /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08DD4EC23FDDF30004D21FD /* Messages.framework */; };
+		D08DD4F023FDDF30004D21FD /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08DD4EF23FDDF30004D21FD /* MessagesViewController.swift */; };
+		D08DD4F323FDDF30004D21FD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D08DD4F123FDDF30004D21FD /* MainInterface.storyboard */; };
+		D08DD4F523FDDF31004D21FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D08DD4F423FDDF31004D21FD /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D08DD4E923FDDF30004D21FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D08DD4D723FDDF30004D21FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D08DD4E623FDDF30004D21FD;
+			remoteInfo = "SmileSticker MessagesExtension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D08DD4FC23FDDF31004D21FD /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				D08DD4E823FDDF30004D21FD /* SmileSticker MessagesExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D08DD4DD23FDDF30004D21FD /* SmileSticker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmileSticker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08DD4E023FDDF30004D21FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D08DD4E223FDDF30004D21FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D08DD4E723FDDF30004D21FD /* SmileSticker MessagesExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SmileSticker MessagesExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08DD4EC23FDDF30004D21FD /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		D08DD4EF23FDDF30004D21FD /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		D08DD4F223FDDF30004D21FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		D08DD4F423FDDF31004D21FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D08DD4F623FDDF31004D21FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D08DD4E423FDDF30004D21FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D08DD4ED23FDDF30004D21FD /* Messages.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D08DD4D623FDDF30004D21FD = {
+			isa = PBXGroup;
+			children = (
+				D08DD4DF23FDDF30004D21FD /* SmileSticker */,
+				D08DD4EE23FDDF30004D21FD /* SmileSticker MessagesExtension */,
+				D08DD4EB23FDDF30004D21FD /* Frameworks */,
+				D08DD4DE23FDDF30004D21FD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D08DD4DE23FDDF30004D21FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D08DD4DD23FDDF30004D21FD /* SmileSticker.app */,
+				D08DD4E723FDDF30004D21FD /* SmileSticker MessagesExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D08DD4DF23FDDF30004D21FD /* SmileSticker */ = {
+			isa = PBXGroup;
+			children = (
+				D08DD4E023FDDF30004D21FD /* Assets.xcassets */,
+				D08DD4E223FDDF30004D21FD /* Info.plist */,
+			);
+			path = SmileSticker;
+			sourceTree = "<group>";
+		};
+		D08DD4EB23FDDF30004D21FD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D08DD4EC23FDDF30004D21FD /* Messages.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D08DD4EE23FDDF30004D21FD /* SmileSticker MessagesExtension */ = {
+			isa = PBXGroup;
+			children = (
+				D08DD4EF23FDDF30004D21FD /* MessagesViewController.swift */,
+				D08DD4F123FDDF30004D21FD /* MainInterface.storyboard */,
+				D08DD4F423FDDF31004D21FD /* Assets.xcassets */,
+				D08DD4F623FDDF31004D21FD /* Info.plist */,
+			);
+			path = "SmileSticker MessagesExtension";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D08DD4DC23FDDF30004D21FD /* SmileSticker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D08DD4FD23FDDF31004D21FD /* Build configuration list for PBXNativeTarget "SmileSticker" */;
+			buildPhases = (
+				D08DD4DB23FDDF30004D21FD /* Resources */,
+				D08DD4FC23FDDF31004D21FD /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D08DD4EA23FDDF30004D21FD /* PBXTargetDependency */,
+			);
+			name = SmileSticker;
+			productName = SmileSticker;
+			productReference = D08DD4DD23FDDF30004D21FD /* SmileSticker.app */;
+			productType = "com.apple.product-type.application.messages";
+		};
+		D08DD4E623FDDF30004D21FD /* SmileSticker MessagesExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D08DD4F923FDDF31004D21FD /* Build configuration list for PBXNativeTarget "SmileSticker MessagesExtension" */;
+			buildPhases = (
+				D08DD4E323FDDF30004D21FD /* Sources */,
+				D08DD4E423FDDF30004D21FD /* Frameworks */,
+				D08DD4E523FDDF30004D21FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SmileSticker MessagesExtension";
+			productName = "SmileSticker MessagesExtension";
+			productReference = D08DD4E723FDDF30004D21FD /* SmileSticker MessagesExtension.appex */;
+			productType = "com.apple.product-type.app-extension.messages";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D08DD4D723FDDF30004D21FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Justin Allen";
+				TargetAttributes = {
+					D08DD4DC23FDDF30004D21FD = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					D08DD4E623FDDF30004D21FD = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
+			};
+			buildConfigurationList = D08DD4DA23FDDF30004D21FD /* Build configuration list for PBXProject "SmileSticker" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D08DD4D623FDDF30004D21FD;
+			productRefGroup = D08DD4DE23FDDF30004D21FD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D08DD4DC23FDDF30004D21FD /* SmileSticker */,
+				D08DD4E623FDDF30004D21FD /* SmileSticker MessagesExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D08DD4DB23FDDF30004D21FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D08DD4E123FDDF30004D21FD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D08DD4E523FDDF30004D21FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D08DD4F523FDDF31004D21FD /* Assets.xcassets in Resources */,
+				D08DD4F323FDDF30004D21FD /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D08DD4E323FDDF30004D21FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D08DD4F023FDDF30004D21FD /* MessagesViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D08DD4EA23FDDF30004D21FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D08DD4E623FDDF30004D21FD /* SmileSticker MessagesExtension */;
+			targetProxy = D08DD4E923FDDF30004D21FD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D08DD4F123FDDF30004D21FD /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D08DD4F223FDDF30004D21FD /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D08DD4F723FDDF31004D21FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D08DD4F823FDDF31004D21FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D08DD4FA23FDDF31004D21FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 562HEMPPEX;
+				INFOPLIST_FILE = "SmileSticker MessagesExtension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.justinjallen.SmileSticker.MessagesExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D08DD4FB23FDDF31004D21FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 562HEMPPEX;
+				INFOPLIST_FILE = "SmileSticker MessagesExtension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.justinjallen.SmileSticker.MessagesExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D08DD4FE23FDDF31004D21FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 562HEMPPEX;
+				INFOPLIST_FILE = SmileSticker/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.justinjallen.SmileSticker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D08DD4FF23FDDF31004D21FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 562HEMPPEX;
+				INFOPLIST_FILE = SmileSticker/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.justinjallen.SmileSticker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D08DD4DA23FDDF30004D21FD /* Build configuration list for PBXProject "SmileSticker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D08DD4F723FDDF31004D21FD /* Debug */,
+				D08DD4F823FDDF31004D21FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D08DD4F923FDDF31004D21FD /* Build configuration list for PBXNativeTarget "SmileSticker MessagesExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D08DD4FA23FDDF31004D21FD /* Debug */,
+				D08DD4FB23FDDF31004D21FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D08DD4FD23FDDF31004D21FD /* Build configuration list for PBXNativeTarget "SmileSticker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D08DD4FE23FDDF31004D21FD /* Debug */,
+				D08DD4FF23FDDF31004D21FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D08DD4D723FDDF30004D21FD /* Project object */;
+}
