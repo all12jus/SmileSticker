@@ -13,6 +13,7 @@
 		D08DD4F023FDDF30004D21FD /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08DD4EF23FDDF30004D21FD /* MessagesViewController.swift */; };
 		D08DD4F323FDDF30004D21FD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D08DD4F123FDDF30004D21FD /* MainInterface.storyboard */; };
 		D08DD4F523FDDF31004D21FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D08DD4F423FDDF31004D21FD /* Assets.xcassets */; };
+		D08DD50123FDE1D1004D21FD /* ConstraintUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08DD50023FDE1D1004D21FD /* ConstraintUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		D08DD4F223FDDF30004D21FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		D08DD4F423FDDF31004D21FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D08DD4F623FDDF31004D21FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D08DD50023FDE1D1004D21FD /* ConstraintUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				D08DD4EF23FDDF30004D21FD /* MessagesViewController.swift */,
+				D08DD50023FDE1D1004D21FD /* ConstraintUtils.swift */,
 				D08DD4F123FDDF30004D21FD /* MainInterface.storyboard */,
 				D08DD4F423FDDF31004D21FD /* Assets.xcassets */,
 				D08DD4F623FDDF31004D21FD /* Info.plist */,
@@ -209,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D08DD50123FDE1D1004D21FD /* ConstraintUtils.swift in Sources */,
 				D08DD4F023FDDF30004D21FD /* MessagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
