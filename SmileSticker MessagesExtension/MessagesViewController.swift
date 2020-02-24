@@ -39,7 +39,7 @@ class MessagesViewController: MSMessagesAppViewController {
 //            }
             
             let happyColor = UIColor.yellow.cgColor
-            let sadColor = UIColor.red.cgColor
+            let sadColor = UIColor.blue.cgColor
             
             let redValue:CGFloat = MessagesViewController.lerp(from: sadColor.components![0], to: happyColor.components![0], val: CGFloat(faceNumber + 0.5))
             let greenValue:CGFloat = MessagesViewController.lerp(from: sadColor.components![1], to: happyColor.components![1], val: CGFloat(faceNumber + 0.5))
@@ -115,80 +115,6 @@ class MessagesViewController: MSMessagesAppViewController {
         return img
     }
     
-    enum Face{
-        case sad
-        case smile
-    }
-    
-    static func drawRectangle(size: CGSize = CGSize(width: 100, height: 100), face: Face) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(size: size)
-
-        let img = renderer.image { ctx in
-            // awesome drawing code
-
-            switch face {
-            case .sad:
-                ctx.cgContext.setFillColor(UIColor.red.cgColor)
-            case .smile:
-                ctx.cgContext.setFillColor(UIColor.green.cgColor)
-//            @unknown default:
-//                break
-            }
-            
-            ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
-            ctx.cgContext.setLineWidth(0)
-            
-            // Background
-            ctx.cgContext.addArc(center: CGPoint(x: size.width/2, y: size.height/2), radius: ((size.height*0.9)/2), startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
-            ctx.cgContext.drawPath(using: .fill)
-            
-            
-            
-            
-            let eyeY = size.height / 2.7
-            // Left Eye
-            let leftEyeCenter = CGPoint(x: size.width / 3.5, y: eyeY)
-            ctx.cgContext.setFillColor(UIColor.white.cgColor)
-            ctx.cgContext.addArc(center: leftEyeCenter, radius: 10, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
-            ctx.cgContext.drawPath(using: .fill)
-            ctx.cgContext.setFillColor(UIColor.black.cgColor)
-            ctx.cgContext.addArc(center: leftEyeCenter, radius: 6, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
-            ctx.cgContext.drawPath(using: .fill)
-            
-            
-            
-            // Right Eye
-            let rightEyeCenter = CGPoint(x: size.width - (size.width / 3.5), y: eyeY)
-            ctx.cgContext.setFillColor(UIColor.white.cgColor)
-            ctx.cgContext.addArc(center: rightEyeCenter, radius: 10, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
-            ctx.cgContext.drawPath(using: .fill)
-            ctx.cgContext.setFillColor(UIColor.black.cgColor)
-            ctx.cgContext.addArc(center: rightEyeCenter, radius: 6, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
-            ctx.cgContext.drawPath(using: .fill)
-            
-            
-            // Smile/Frown
-            let yPoint = (size.height / 3) * 2
-            let startPoint = CGPoint(x: size.width / 4 , y: yPoint )
-            let midPoint =  CGPoint(x: size.width / 2, y:
-                yPoint + ( (face == .smile) ? 25: -10 )
-            )
-            let endPoint = CGPoint(x: (size.width / 4) * 3, y: yPoint)
-            ctx.cgContext.setLineCap(.round)
-            ctx.cgContext.setLineWidth(3)
-            ctx.cgContext.move(to: startPoint)
-            ctx.cgContext.addQuadCurve(to: endPoint, control: midPoint)
-            ctx.cgContext.drawPath(using: .stroke)
-            
-            
-//            ctx.cgContext.setLineWidth(0)
-//            ctx.cgContext.addArc(center: CGPoint(x: size.width/2, y: size.height/2), radius: size.height/3, startAngle: 0, endAngle: CGFloat.pi, clockwise: false)
-//            ctx.cgContext.drawPath(using: .fillStroke)
-        }
-
-        return img
-    }
-    
     let sideView: UIView = {
         let vw = UIView()
         vw.layer.borderWidth = 1
@@ -244,40 +170,6 @@ class MessagesViewController: MSMessagesAppViewController {
             print(error)
         }
     }
-    
-//    var currentFace: Face = .smile
-//    @objc func toggleFace(){
-//        print("toggleFace")
-//        if currentFace == .smile {
-//            currentFace = .sad
-//        } else {
-//            currentFace = .smile
-//        }
-//        do {
-//            let image = MessagesViewController.drawRectangle(face: currentFace)
-//    //        let imageView = UIImageView(image: image)
-//            stickerImageView.image = image
-//            stickerView.sticker = nil
-//            let path = NSTemporaryDirectory().appending(UUID().uuidString).appending(".png")
-//            let url = URL(fileURLWithPath: path)
-//            let data = image.pngData()
-//            try data?.write(to: url)
-//            let sticker = try MSSticker.init(contentsOfFileURL: url, localizedDescription: "Test")
-//    //            let stickerView = MSStickerView()
-//            stickerView.sticker = sticker
-////            DispatchQueue.main.async {
-////                self.stickerImageView.image = image
-////                self.stickerView.sticker = sticker
-////            }
-//
-//            print("sticker should have updated.")
-//        } catch  {
-//            print(error)
-//        }
-//
-////        stickerView.addSubview(imageView)
-//
-//    }
     
     var stickerViewConstaints: Utils.Contraints? = nil
     var settingsViewContstraints:Utils.Contraints? = nil
