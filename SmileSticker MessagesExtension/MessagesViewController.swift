@@ -17,6 +17,24 @@ extension MSSticker {
     }
 }
 
+//class ColorTableViewController: UITableViewController {
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//    }
+//
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 0
+//    }
+//
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        100
+//    }
+//
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        <#code#>
+//    }
+//}
+
 class MessagesViewController: MSMessagesAppViewController {
     
     static func lerp(from a: CGFloat, to b: CGFloat, val: CGFloat) -> CGFloat {
@@ -25,7 +43,10 @@ class MessagesViewController: MSMessagesAppViewController {
     
     static func drawFace(size: CGSize = CGSize(width: 100, height: 100), faceNumber: Float) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: size)
-        let sfMid = faceNumber * 20
+        // 20
+        let sfMid = faceNumber * 40
+        // -10
+        let sfLeft_Right_Y = faceNumber * -8
         let img = renderer.image { ctx in
             // awesome drawing code
 
@@ -65,7 +86,9 @@ class MessagesViewController: MSMessagesAppViewController {
             ctx.cgContext.setLineWidth(0)
             
             // Background
+            
             ctx.cgContext.addArc(center: CGPoint(x: size.width/2, y: size.height/2), radius: ((size.height*0.9)/2), startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
+//            ctx.cgContext.addArc(center: CGPoint(x: size.width/2, y: size.height/2), radius: ((size.height*0.9)/2), startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
             ctx.cgContext.drawPath(using: .fill)
             
             
@@ -95,11 +118,12 @@ class MessagesViewController: MSMessagesAppViewController {
             
             // Smile/Frown
             let yPoint = (size.height / 3) * 2
-            let startPoint = CGPoint(x: size.width / 4 , y: yPoint )
+            let yLRPoint: CGFloat = CGFloat(sfLeft_Right_Y) + (size.height / 3) * 2
+            let startPoint = CGPoint(x: size.width / 4 , y: yLRPoint )
             let midPoint =  CGPoint(x: size.width / 2, y:
                 yPoint + CGFloat(sfMid)
             )
-            let endPoint = CGPoint(x: (size.width / 4) * 3, y: yPoint)
+            let endPoint = CGPoint(x: (size.width / 4) * 3, y: yLRPoint)
             ctx.cgContext.setLineCap(.round)
             ctx.cgContext.setLineWidth(3)
             ctx.cgContext.move(to: startPoint)
