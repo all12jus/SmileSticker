@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D030B0D82405C55D00C8C969 /* ColorTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D030B0D72405C55D00C8C969 /* ColorTable.swift */; };
+		D030B0DC2405E08400C8C969 /* FaceDrawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D030B0DB2405E08400C8C969 /* FaceDrawing.swift */; };
 		D08DD4E123FDDF30004D21FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D08DD4E023FDDF30004D21FD /* Assets.xcassets */; };
 		D08DD4E823FDDF30004D21FD /* SmileSticker MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D08DD4E723FDDF30004D21FD /* SmileSticker MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D08DD4ED23FDDF30004D21FD /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D08DD4EC23FDDF30004D21FD /* Messages.framework */; };
@@ -41,6 +43,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D030B0D72405C55D00C8C969 /* ColorTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTable.swift; sourceTree = "<group>"; };
+		D030B0DB2405E08400C8C969 /* FaceDrawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDrawing.swift; sourceTree = "<group>"; };
 		D08DD4DD23FDDF30004D21FD /* SmileSticker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmileSticker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D08DD4E023FDDF30004D21FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D08DD4E223FDDF30004D21FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 				D08DD4F123FDDF30004D21FD /* MainInterface.storyboard */,
 				D08DD4F423FDDF31004D21FD /* Assets.xcassets */,
 				D08DD4F623FDDF31004D21FD /* Info.plist */,
+				D030B0D72405C55D00C8C969 /* ColorTable.swift */,
+				D030B0DB2405E08400C8C969 /* FaceDrawing.swift */,
 			);
 			path = "SmileSticker MessagesExtension";
 			sourceTree = "<group>";
@@ -234,7 +240,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D08DD50123FDE1D1004D21FD /* ConstraintUtils.swift in Sources */,
+				D030B0D82405C55D00C8C969 /* ColorTable.swift in Sources */,
 				D08DD4F023FDDF30004D21FD /* MessagesViewController.swift in Sources */,
+				D030B0DC2405E08400C8C969 /* FaceDrawing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

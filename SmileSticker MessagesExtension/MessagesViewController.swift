@@ -17,126 +17,68 @@ extension MSSticker {
     }
 }
 
-//class ColorTableViewController: UITableViewController {
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        100
-//    }
-//
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
-//}
+class CollectionColorCell: UICollectionViewCell {
+    
+    public var color: UIColor{
+        didSet{
+            self.colorView.backgroundColor = color
+        }
+    }
+    
+    let colorView: UIView = {
+        let vw = UIView()
+        vw.layer.borderColor = UIColor.label.cgColor
+        vw.layer.borderWidth = 1
+        vw.layer.cornerRadius = 25
+        return vw
+    }()
+        
+    override init(frame: CGRect){
+        self.color = .clear
+        super.init(frame: .zero)
+        let _ = Utils.SetupContraints(child: colorView, parent: self)
+        print(colorView.layer.cornerRadius)
+        colorView.clipsToBounds = true
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
-class MessagesViewController: MSMessagesAppViewController {
+
+class TableController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    public let cellId = "Cell"
+    public var colorDelegate: ColorSelectorDelegate?
+    let colors:[UIColor] = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green, UIColor.yellow]
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return colors.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CollectionColorCell
+        cell.color = colors[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        colorDelegate!.changeColor(color: colors[indexPath.row])
+    }
+}
+
+protocol ColorSelectorDelegate {
+    func changeColor(color: UIColor)
+}
+
+class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate {
+    func changeColor(color: UIColor) {
+        selectedColor = color
+        changeFace()
+    }
+    
     
     static func lerp(from a: CGFloat, to b: CGFloat, val: CGFloat) -> CGFloat {
         return (1 - val) * a + val * b
-    }
-    
-    static func drawFace(size: CGSize = CGSize(width: 100, height: 100), faceNumber: Float) -> UIImage {
-        let renderer = UIGraphicsImageRenderer(size: size)
-        // 20
-        let sfMid = faceNumber * 40
-        // -10
-        let sfLeft_Right_Y = faceNumber * -8
-        let img = renderer.image { ctx in
-            // awesome drawing code
-
-//            switch face {
-//            case .sad:
-//                ctx.cgContext.setFillColor(UIColor.red.cgColor)
-//            case .smile:
-//                ctx.cgContext.setFillColor(UIColor.green.cgColor)
-//            @unknown default:
-//                break
-//            }
-            
-            let happyColor = UIColor.yellow.cgColor
-            let sadColor = UIColor.blue.cgColor
-            
-            let redValue:CGFloat = MessagesViewController.lerp(from: sadColor.components![0], to: happyColor.components![0], val: CGFloat(faceNumber + 0.5))
-            let greenValue:CGFloat = MessagesViewController.lerp(from: sadColor.components![1], to: happyColor.components![1], val: CGFloat(faceNumber + 0.5))
-            let blueValue:CGFloat = MessagesViewController.lerp(from: sadColor.components![2], to: happyColor.components![2], val: CGFloat(faceNumber + 0.5))
-            
-            if #available(iOSApplicationExtension 13.0, *) {
-                let faceColor: CGColor = CGColor.init(srgbRed: redValue, green: greenValue, blue: blueValue, alpha: 1)
-                ctx.cgContext.setFillColor(faceColor)
-            } else {
-                // Fallback on earlier versions
-                let faceColor: CGColor = UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: 1).cgColor
-                ctx.cgContext.setFillColor(faceColor)
-            }
-            
-//            ctx.cgContext.setFillColor(faceColor)
-//            if faceNumber > 0 {
-//                ctx.cgContext.setFillColor(UIColor.green.cgColor)
-//            } else {
-//                ctx.cgContext.setFillColor(UIColor.red.cgColor)
-//            }
-            
-            ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
-            ctx.cgContext.setLineWidth(0)
-            
-            // Background
-            
-            ctx.cgContext.addArc(center: CGPoint(x: size.width/2, y: size.height/2), radius: ((size.height*0.9)/2), startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
-//            ctx.cgContext.addArc(center: CGPoint(x: size.width/2, y: size.height/2), radius: ((size.height*0.9)/2), startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
-            ctx.cgContext.drawPath(using: .fill)
-            
-            
-            
-            
-            let eyeY = size.height / 2.7
-            // Left Eye
-            let leftEyeCenter = CGPoint(x: size.width / 3.5, y: eyeY)
-            ctx.cgContext.setFillColor(UIColor.white.cgColor)
-            ctx.cgContext.addArc(center: leftEyeCenter, radius: 10, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
-            ctx.cgContext.drawPath(using: .fill)
-            ctx.cgContext.setFillColor(UIColor.black.cgColor)
-            ctx.cgContext.addArc(center: leftEyeCenter, radius: 6, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
-            ctx.cgContext.drawPath(using: .fill)
-            
-            
-            
-            // Right Eye
-            let rightEyeCenter = CGPoint(x: size.width - (size.width / 3.5), y: eyeY)
-            ctx.cgContext.setFillColor(UIColor.white.cgColor)
-            ctx.cgContext.addArc(center: rightEyeCenter, radius: 10, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
-            ctx.cgContext.drawPath(using: .fill)
-            ctx.cgContext.setFillColor(UIColor.black.cgColor)
-            ctx.cgContext.addArc(center: rightEyeCenter, radius: 6, startAngle: 0, endAngle: 2 * CGFloat.pi, clockwise: false)
-            ctx.cgContext.drawPath(using: .fill)
-            
-            
-            // Smile/Frown
-            let yPoint = (size.height / 3) * 2
-            let yLRPoint: CGFloat = CGFloat(sfLeft_Right_Y) + (size.height / 3) * 2
-            let startPoint = CGPoint(x: size.width / 4 , y: yLRPoint )
-            let midPoint =  CGPoint(x: size.width / 2, y:
-                yPoint + CGFloat(sfMid)
-            )
-            let endPoint = CGPoint(x: (size.width / 4) * 3, y: yLRPoint)
-            ctx.cgContext.setLineCap(.round)
-            ctx.cgContext.setLineWidth(3)
-            ctx.cgContext.move(to: startPoint)
-            ctx.cgContext.addQuadCurve(to: endPoint, control: midPoint)
-            ctx.cgContext.drawPath(using: .stroke)
-            
-            
-//            ctx.cgContext.setLineWidth(0)
-//            ctx.cgContext.addArc(center: CGPoint(x: size.width/2, y: size.height/2), radius: size.height/3, startAngle: 0, endAngle: CGFloat.pi, clockwise: false)
-//            ctx.cgContext.drawPath(using: .fillStroke)
-        }
-
-        return img
     }
     
     let sideView: UIView = {
@@ -152,14 +94,6 @@ class MessagesViewController: MSMessagesAppViewController {
         return stickerView
     }()
     
-//    let toggleSwitch: UISwitch = {
-//        let sw = UISwitch()
-//        sw.isOn = true
-//        sw.addTarget(self, action: #selector(toggleFace), for: UIControl.Event.valueChanged)
-////        sw.target(forAction: #selector(toggleFace), withSender: nil)
-//        return sw
-//    }()
-    
     let slider: UISlider = {
         let slider = UISlider()
         slider.maximumValue = 1
@@ -170,11 +104,11 @@ class MessagesViewController: MSMessagesAppViewController {
         return slider
     }()
     
-    @objc func changeFace(){
+    var selectedColor: UIColor = .green
+    
+    @objc public func changeFace(){
         do {
-            let image = MessagesViewController.drawFace(faceNumber: slider.value)
-//            let image = MessagesViewController.drawRectangle(face: currentFace)
-    //        let imageView = UIImageView(image: image)
+            let image = FaceDrawing.drawFace(smileNumber: slider.value, backgroundColor: selectedColor)
             stickerImageView.image = image
             stickerView.sticker = nil
             let path = NSTemporaryDirectory().appending(UUID().uuidString).appending(".png")
@@ -182,14 +116,7 @@ class MessagesViewController: MSMessagesAppViewController {
             let data = image.pngData()
             try data?.write(to: url)
             let sticker = try MSSticker.init(contentsOfFileURL: url, localizedDescription: "Test")
-    //            let stickerView = MSStickerView()
             stickerView.sticker = sticker
-//            DispatchQueue.main.async {
-//                self.stickerImageView.image = image
-//                self.stickerView.sticker = sticker
-//            }
-            
-//            print("sticker should have updated.")
         } catch  {
             print(error)
         }
@@ -197,37 +124,40 @@ class MessagesViewController: MSMessagesAppViewController {
     
     var stickerViewConstaints: Utils.Contraints? = nil
     var settingsViewContstraints:Utils.Contraints? = nil
+    var controller = TableController() // <------ wtf
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+//        let emptyView = UIView()
         // Do any additional setup after loading the view.
         view.addSubview(slider)
         view.addSubview(stickerView)
-//        view.addSubview(toggleSwitch)
         
-        do {
-//            let image = MessagesViewController.drawRectangle(face: .smile)
-            let image = MessagesViewController.drawFace(faceNumber: slider.value)
-            stickerImageView = UIImageView(image: image)
-            let path = NSTemporaryDirectory().appending(UUID().uuidString).appending(".png")
-            let url = URL(fileURLWithPath: path)
-            let data = image.pngData()
-            try data?.write(to: url)
-            let sticker = try MSSticker.init(contentsOfFileURL: url, localizedDescription: "Test")
-            stickerView.sticker = sticker
-            stickerView.addSubview(stickerImageView)
-        } catch  {
-            
-        }
+        controller.colorDelegate = self
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 1, left: 2, bottom: 1, right: 2)
+        layout.itemSize = CGSize(width: 50, height: 50)
+        print(layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.delegate = controller
+        collectionView.dataSource = controller
+        collectionView.register(CollectionColorCell.self, forCellWithReuseIdentifier: controller.cellId)
+        view.addSubview(collectionView)
+        stickerView.addSubview(stickerImageView)
+        changeFace()
         
 //            stickerView.addSubview(stickerImageView)
         
-        stickerViewConstaints = Utils.SetupContraints(child: stickerView, parent: view, addToParent: false, top: true, topConstant: 100, leading: false, trailing: false, bottom: false, centerX: true, centerY: true, width: true, widthConstant: 100, height: true, heightConstant: 100)
-        stickerViewConstaints?.topAnchor?.isActive = false
-        
+        stickerViewConstaints = Utils.SetupContraints(child: stickerView, parent: view, addToParent: false, top: true, topConstant: 4, leading: false, trailing: false, bottom: false, centerX: true, width: true, widthConstant: 100, height: true, heightConstant: 100)
+
         let padding = view.bounds.width/4
-        let _ = Utils.SetupContraints(child: slider, parent: view, addToParent: false, topConstant: 5, topTarget: stickerView.bottomAnchor, leading: true, leadingConstant: padding, trailing: true, trailingConstant: padding, centerX: true)
-    
+        let _ = Utils.SetupContraints(child: slider, parent: view, addToParent: false, topConstant: 5, topTarget: stickerView.bottomAnchor, leading: true, leadingConstant: padding, trailing: true, trailingConstant: padding, bottom: false, centerX: true)
+        
+        let _ = Utils.SetupContraints(child: collectionView, parent: view, addToParent: false, topConstant: 5, topTarget: slider.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, centerX: true)
+
     }
     
     
@@ -274,35 +204,35 @@ class MessagesViewController: MSMessagesAppViewController {
         // Use this to clean up state related to the deleted message.
     }
     
-    override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        // Called before the extension transitions to a new presentation style.
-        print("Changing?!")
-        print(view.bounds.size)
-        print(presentationStyle.rawValue)
-        stickerView.alpha = 0.5
-        UIView.animate(withDuration: 0.1) {
-            switch presentationStyle {
-            case .compact:
-                self.stickerViewConstaints?.topAnchor?.isActive = false
-                self.stickerViewConstaints?.centerYAnchor?.isActive = true
-                break
-            case .expanded:
-                self.stickerViewConstaints?.centerYAnchor?.isActive = false
-                self.stickerViewConstaints?.topAnchor?.isActive = true
-                break
-            default: break
-            }
-            self.view.layoutIfNeeded()
-        }
-        // Use this method to prepare for the change in presentation style.
-    }
-    
-    override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        // Called after the extension transitions to a new presentation style.
-        print("changed")
-        stickerView.alpha = 1
-        
-        // Use this method to finalize any behaviors associated with the change in presentation style.
-    }
+//    override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+//        // Called before the extension transitions to a new presentation style.
+//        print("Changing?!")
+//        print(view.bounds.size)
+//        print(presentationStyle.rawValue)
+//        stickerView.alpha = 0.5
+//        UIView.animate(withDuration: 0.1) {
+//            switch presentationStyle {
+//            case .compact:
+//                self.stickerViewConstaints?.topAnchor?.isActive = false
+//                self.stickerViewConstaints?.centerYAnchor?.isActive = true
+//                break
+//            case .expanded:
+//                self.stickerViewConstaints?.centerYAnchor?.isActive = false
+//                self.stickerViewConstaints?.topAnchor?.isActive = true
+//                break
+//            default: break
+//            }
+//            self.view.layoutIfNeeded()
+//        }
+//        // Use this method to prepare for the change in presentation style.
+//    }
+//
+//    override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+//        // Called after the extension transitions to a new presentation style.
+//        print("changed")
+//        stickerView.alpha = 1
+//
+//        // Use this method to finalize any behaviors associated with the change in presentation style.
+//    }
 
 }
