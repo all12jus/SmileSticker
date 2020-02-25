@@ -157,7 +157,7 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         let padding = view.bounds.width/4
         let _ = Utils.SetupContraints(child: slider, parent: view, addToParent: false, topConstant: 5, topTarget: stickerView.bottomAnchor, leading: true, leadingConstant: padding, trailing: true, trailingConstant: padding, bottom: false, centerX: true)
         
-        let _ = Utils.SetupContraints(child: collectionView, parent: view, addToParent: false, topConstant: 5, topTarget: slider.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, centerX: true)
+        let _ = Utils.SetupContraints(child: collectionView, parent: view, addToParent: false, topConstant: 5, topTarget: slider.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, centerX: true, height: true, heightConstant: 60) // this shouldn't pin to bottom on expanded mode....
 
     }
     
