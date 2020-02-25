@@ -50,7 +50,7 @@ class CollectionColorCell: UICollectionViewCell {
 class TableController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     public let cellId = "Cell"
     public var colorDelegate: ColorSelectorDelegate?
-    let colors:[UIColor] = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green, UIColor.yellow]
+    let colors:[UIColor] = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green, UIColor.yellow, UIColor.purple]
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colors.count
     }
@@ -138,6 +138,7 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 1, left: 2, bottom: 1, right: 2)
+        layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 50, height: 50)
         print(layout)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
