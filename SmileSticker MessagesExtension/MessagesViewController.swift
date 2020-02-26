@@ -74,6 +74,7 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
     func changeColor(color: UIColor) {
         selectedColor = color
         changeFace()
+        colorPickerViewController.changeColor(color: color)
     }
     
     
@@ -126,6 +127,9 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
     var settingsViewContstraints:Utils.Contraints? = nil
     var controller = TableController() // <------ wtf
     
+    
+    let colorPickerViewController = ColorPickerViewController()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -133,7 +137,10 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         // Do any additional setup after loading the view.
         view.addSubview(slider)
         view.addSubview(stickerView)
+        view.addSubview(colorPickerViewController.view)
+        colorPickerViewController.view.isHidden = true
         
+        colorPickerViewController.colorDelegate = self
         controller.colorDelegate = self
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -157,8 +164,9 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         let padding = view.bounds.width/4
         let _ = Utils.SetupContraints(child: slider, parent: view, addToParent: false, topConstant: 5, topTarget: stickerView.bottomAnchor, leading: true, leadingConstant: padding, trailing: true, trailingConstant: padding, bottom: false, centerX: true)
         
-        let _ = Utils.SetupContraints(child: collectionView, parent: view, addToParent: false, topConstant: 5, topTarget: slider.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, centerX: true, height: true, heightConstant: 60) // this shouldn't pin to bottom on expanded mode....
-
+        let _ = Utils.SetupContraints(child: collectionView, parent: view, addToParent: false, topConstant: 5, topTarget: slider.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, bottom: false, centerX: true, height: true, heightConstant: 60) // this shouldn't pin to bottom on expanded mode....
+        
+        let _ = Utils.SetupContraints(child: colorPickerViewController.view, parent: view, addToParent: false, topConstant: 5, topTarget: collectionView.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, centerX: true)
     }
     
     
@@ -203,6 +211,19 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         // Called when the user deletes the message without sending it.
     
         // Use this to clean up state related to the deleted message.
+    }
+    
+    override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+        if presentationStyle == .expanded {
+            // show colorPickerView
+            colorPickerViewController.view.isHidden = false
+        } else {
+            // hide colorPickerView
+            colorPickerViewController.view.isHidden = true
+//            colorPickerViewController.color = selectedColor
+            colorPickerViewController.updateColorSliders(selectedColor)
+            // TODO: init sliders!!!!
+        }
     }
     
 //    override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
