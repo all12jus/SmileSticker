@@ -96,53 +96,11 @@ class ColorPickerViewController : UIViewController, ColorSelectorDelegate {
         let greenView: UIView = getSliderView(slider: greenSlider, colorText: "G", color: .green)
         let blueView: UIView = getSliderView(slider: blueSlider, colorText: "B", color: .blue)
         
-//        let redView: UIView = {
-//            let l = UILabel()
-//            l.text = "Red"
-//            let vw = UIView()
-//            vw.addSubview(redSlider)
-//            vw.addSubview(l)
-//
-//            let _ = Utils.SetupContraints(child: l, parent: vw, addToParent: false, top: true, leading: true, leadingConstant: 8, trailing: true, trailingConstant: 4, trailingTarget: redSlider.leadingAnchor, bottom: true)
-//            let _ = Utils.SetupContraints(child: redSlider, parent: vw, addToParent: false, top: true, leading: true, leadingConstant: 4, leadingTarget: l.trailingAnchor, trailing: true, trailingConstant: 8, bottom: true)
-//            vw.backgroundColor = .red
-//            return vw
-//        }()
-//
-//        let greenView: UIView = {
-//            let l = UILabel()
-//            l.text = "Green"
-//            let vw = UIView()
-//            vw.addSubview(greenSlider)
-//            vw.addSubview(l)
-//
-//            let _ = Utils.SetupContraints(child: l, parent: vw, addToParent: false, top: true, leading: true, leadingConstant: 8, trailing: true, trailingConstant: 4, trailingTarget: greenSlider.leadingAnchor, bottom: true)
-//            let _ = Utils.SetupContraints(child: greenSlider, parent: vw, addToParent: false, top: true, leading: true, leadingConstant: 4, leadingTarget: l.trailingAnchor, trailing: true, trailingConstant: 8, bottom: true)
-//            vw.backgroundColor = .green
-//            return vw
-//        }()
-//
-//        let blueView: UIView = {
-//            let l = UILabel()
-//            l.text = "Blue"
-//            let vw = UIView()
-//            vw.addSubview(blueSlider)
-//            vw.addSubview(l)
-//
-//            let _ = Utils.SetupContraints(child: l, parent: vw, addToParent: false, top: true, leading: true, leadingConstant: 8, trailing: true, trailingConstant: 4, trailingTarget: blueSlider.leadingAnchor, bottom: true)
-//            let _ = Utils.SetupContraints(child: blueSlider, parent: vw, addToParent: false, top: true, leading: true, leadingConstant: 4, leadingTarget: l.trailingAnchor, trailing: true, trailingConstant: 8, bottom: true)
-//            vw.backgroundColor = .blue
-//            return vw
-//        }()
-        
-        
         let stackView = UIStackView(arrangedSubviews: [redView, greenView, blueView])
-//        let stackView = UIStackView(arrangedSubviews: [redSlider, greenSlider, blueSlider])
         stackView.alignment = .fill
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         let _ = Utils.SetupContraints(child: stackView, parent: view)
-        // TODO: actually make the layout happen.
     }
     
 }
