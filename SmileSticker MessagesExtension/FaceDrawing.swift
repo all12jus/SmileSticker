@@ -17,21 +17,6 @@ class FaceDrawing {
         // -10
         let sfLeft_Right_Y = smileNumber * -8
         let img = renderer.image { ctx in
-//            let happyColor = UIColor.yellow.cgColor
-//            let sadColor = UIColor.blue.cgColor
-            
-//            let redValue:CGFloat = MessagesViewController.lerp(from: sadColor.components![0], to: happyColor.components![0], val: CGFloat(faceNumber + 0.5))
-//            let greenValue:CGFloat = MessagesViewController.lerp(from: sadColor.components![1], to: happyColor.components![1], val: CGFloat(faceNumber + 0.5))
-//            let blueValue:CGFloat = MessagesViewController.lerp(from: sadColor.components![2], to: happyColor.components![2], val: CGFloat(faceNumber + 0.5))
-//
-//            if #available(iOSApplicationExtension 13.0, *) {
-//                let faceColor: CGColor = CGColor.init(srgbRed: redValue, green: greenValue, blue: blueValue, alpha: 1)
-//                ctx.cgContext.setFillColor(faceColor)
-//            } else {
-//                // Fallback on earlier versions
-//                let faceColor: CGColor = UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: 1).cgColor
-//                ctx.cgContext.setFillColor(faceColor)
-//            }
             ctx.cgContext.setFillColor(backgroundColor.cgColor)
             ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
             ctx.cgContext.setLineWidth(0)
