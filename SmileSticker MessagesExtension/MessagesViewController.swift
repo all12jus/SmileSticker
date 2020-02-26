@@ -100,7 +100,7 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         slider.maximumValue = 1
         slider.minimumValue = -1
         slider.addTarget(self, action: #selector(changeFace), for: UIControl.Event.valueChanged)
-        slider.value = 1
+        slider.value = 0.65
         // could i add snap points?
         return slider
     }()
