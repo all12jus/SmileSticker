@@ -70,7 +70,83 @@ protocol ColorSelectorDelegate {
     func changeColor(color: UIColor)
 }
 
+//extension UIApplication {
+//
+//    func applicationVersion() -> String {
+//
+//        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+//    }
+//
+//    func applicationBuild() -> String {
+//
+//        return Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
+//    }
+//
+//    func versionBuild() -> String {
+//
+//        let version = self.applicationVersion()
+//        let build = self.applicationBuild()
+//
+////        return "\(version) (\(build)) \(gitHash)"
+//        return "\(version) (\(build))"
+//    }
+//
+//    func version() -> String {
+//        let dictionary = Bundle.main.infoDictionary!
+//        let version = dictionary["CFBundleShortVersionString"] as! String
+//        let build = dictionary["CFBundleVersion"] as! String
+//        return "\(version) build \(build)"
+//    }
+//
+//    func buildDate() -> String {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateStyle = .medium
+//        dateFormatter.timeStyle = .none
+//        if let infoPath = Bundle.main.path(forResource: "Info", ofType: "plist"), let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath), let infoDate = infoAttr[.modificationDate] as? Date {
+//            return dateFormatter.string(from: infoDate)
+//        }
+//        return dateFormatter.string(from: Date())
+//    }
+//}
+
 class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate {
+    
+    func applicationVersion() -> String {
+
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    }
+
+    func applicationBuild() -> String {
+
+        return Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
+    }
+
+    func versionBuild() -> String {
+
+        let version = self.applicationVersion()
+        let build = self.applicationBuild()
+
+//        return "\(version) (\(build)) \(gitHash)"
+        return "\(version) (\(build))"
+    }
+    
+    func version() -> String {
+        let dictionary = Bundle.main.infoDictionary!
+        let version = dictionary["CFBundleShortVersionString"] as! String
+        let build = dictionary["CFBundleVersion"] as! String
+        return "\(version) build \(build)"
+    }
+    
+    func buildDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        if let infoPath = Bundle.main.path(forResource: "Info", ofType: "plist"), let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath), let infoDate = infoAttr[.modificationDate] as? Date {
+            return dateFormatter.string(from: infoDate)
+        }
+        return dateFormatter.string(from: Date())
+    }
+    
     func changeColor(color: UIColor) {
         selectedColor = color
         changeFace()
@@ -130,9 +206,13 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
     
     let colorPickerViewController = ColorPickerViewController()
     
+    
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        
 //        let emptyView = UIView()
         // Do any additional setup after loading the view.
         view.addSubview(slider)
@@ -167,8 +247,56 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         let _ = Utils.SetupContraints(child: collectionView, parent: view, addToParent: false, topConstant: 5, topTarget: slider.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, bottom: false, centerX: true, height: true, heightConstant: 60) // this shouldn't pin to bottom on expanded mode....
         
         let _ = Utils.SetupContraints(child: colorPickerViewController.view, parent: view, addToParent: false, topConstant: 5, topTarget: collectionView.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, centerX: true)
+        
+        // long pressed
+//        stickerView.target(forAction: #selector(stickerViewSelected), withSender: nil)
+        
+//        let stickerTap = UITapGestureRecognizer(target: self, action: #selector(stickerViewSelected))
+//        stickerView.addGestureRecognizer(stickerTap)
+//        MSConversation.
+        
+//        activeConversation
     }
     
+    var currentConversation: MSConversation?
+    
+    @objc func stickerViewSelected(){
+        print("Tapped")
+        print(currentConversation as Any)
+        if let convo = activeConversation {
+//            print(convo.remoteParticipantIdentifiers)
+            if let sticker = stickerView.sticker {
+                convo.insert(sticker) { (e) in
+                    print(e as Any)
+                    if e == nil {
+                        let data: ApiController.UsageData = ApiController.UsageData(
+                            color: ApiController.Color(uiColor: self.selectedColor),
+                            slider: self.slider.value
+                        )
+                        let usage: ApiController.UsageModel = ApiController.UsageModel(
+                            BundleID: Bundle.main.bundleIdentifier!,
+                            AppVersion: self.applicationVersion(),
+                            BuildNumber: self.applicationBuild(),
+                            Data: data
+                        )
+                        ApiController.SubmitReport(usage)
+                    }
+//                    if e != nil {
+//                        convo.send(sticker) { (e1) in
+//                            print(e1)
+//                        }
+//                    }
+                }
+                
+                
+//                convo.insert(<#T##sticker: MSSticker##MSSticker#>, completionHandler: <#T##((Error?) -> Void)?##((Error?) -> Void)?##(Error?) -> Void#>)
+            }
+        }
+//        currentConversation?.insert(stickerView.sticker!, completionHandler: { (err) in
+//            print("SEnt")
+//            print(err as Any)
+//        })
+    }
     
     
 //    override func viewDidLayoutSubviews() {
@@ -184,6 +312,13 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         // This will happen when the extension is about to present UI.
         
         // Use this method to configure the extension and restore previously stored state.
+        let stickerTap = UITapGestureRecognizer(target: self, action: #selector(stickerViewSelected))
+        stickerView.addGestureRecognizer(stickerTap)
+        
+        let stickerLong = UILongPressGestureRecognizer(target: self, action: #selector(stickerViewSelected))
+        stickerView.addGestureRecognizer(stickerLong) // TODO: do different for long press....
+        
+        currentConversation = conversation
     }
     
     override func didResignActive(with conversation: MSConversation) {
@@ -205,11 +340,13 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
     
     override func didStartSending(_ message: MSMessage, conversation: MSConversation) {
         // Called when the user taps the send button.
+//        print(message)
+        print("Sending...")
     }
     
     override func didCancelSending(_ message: MSMessage, conversation: MSConversation) {
         // Called when the user deletes the message without sending it.
-    
+        print("cancel...")
         // Use this to clean up state related to the deleted message.
     }
     

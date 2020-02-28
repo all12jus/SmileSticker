@@ -12,11 +12,28 @@ import UIKit
 // http://www.appsdeveloperblog.com/http-post-request-example-in-swift/
 class ApiController : UIViewController {
     
+    struct Color : Codable {
+        var red : CGFloat = 0.0, green: CGFloat = 0.0, blue: CGFloat = 0.0, alpha: CGFloat = 0.0
+
+        var uiColor : UIColor {
+            return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        }
+
+        init(uiColor : UIColor) {
+            uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        }
+    }
+    
+    struct UsageData: Codable {
+        var color: Color
+        var slider: Float
+    }
+    
     struct UsageModel: Codable {
-        var userId: Int
-        var id: Int?
-        var title: String
-        var completed: Bool
+        var BundleID: String
+        var AppVersion: String
+        var BuildNumber: String
+        var Data: UsageData
     }
     
     private static let API_Endpoint = "https://api-v1.smartsmilesticker.app/iOS/";
@@ -27,6 +44,7 @@ class ApiController : UIViewController {
         super.viewDidLoad()
     }
     
+    // TODO: add call back for success/error
     public static func SubmitReport(_ usage: UsageModel){
         // Prepare URL
         let url = URL(string: ApiController.API_Endpoint)
@@ -44,17 +62,17 @@ class ApiController : UIViewController {
             // Perform HTTP Request
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                     
-                    // Check for Error
-                    if let error = error {
-                        print("Error took place \(error)")
-                        return
-                    }
-             
-                    // Convert HTTP Response Data to a String
-                    if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                        print("Response data string:\n \(dataString)")
-                        // can decode response here if we want.
-                    }
+                // Check for Error
+                if let error = error {
+                    print("Error took place \(error)")
+                    return
+                }
+         
+                // Convert HTTP Response Data to a String
+                if let data = data, let dataString = String(data: data, encoding: .utf8) {
+                    print("Response data string:\n \(dataString)")
+                    // can decode response here if we want.
+                }
             }
             task.resume()
         } catch {
