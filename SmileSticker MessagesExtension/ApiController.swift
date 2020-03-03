@@ -10,33 +10,66 @@ import Foundation
 import UIKit
 
 // http://www.appsdeveloperblog.com/http-post-request-example-in-swift/
+
+extension UIColor {
+    func hex() -> String{
+        let (r, g, b, _) = self.rgba
+        
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+
+        return NSString(format:"#%06x", rgb) as String
+    }
+}
+
 class ApiController : UIViewController {
     
-    struct Color : Codable {
-        var red : CGFloat = 0.0, green: CGFloat = 0.0, blue: CGFloat = 0.0, alpha: CGFloat = 0.0
-
-        var uiColor : UIColor {
-            return UIColor(red: red, green: green, blue: blue, alpha: alpha)
-        }
-
-        init(uiColor : UIColor) {
-            uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        }
-    }
+//    struct Color : Codable {
+////        var red : CGFloat = 0.0, green: CGFloat = 0.0, blue: CGFloat = 0.0, alpha: CGFloat = 0.0
+//        var hex: String = ""
+//
+////        var uiColor : UIColor {
+////            return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+////        }
+//
+//        init(uiColor : UIColor) {
+////            uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+//            let (r, g, b, _) = uiColor.rgba
+//
+//            let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+//
+//            hex = NSString(format:"#%06x", rgb) as String
+//        }
+//    }
     
-    struct UsageData: Codable {
-        var color: Color
-        var slider: Float
-    }
+//    struct UsageData: Codable {
+//        var color: Color
+//        var slider: Float
+//    }
     
     struct UsageModel: Codable {
         var BundleID: String
         var AppVersion: String
         var BuildNumber: String
-        var Data: UsageData
+        // could add device id...
+        var color: String
+        var slider: Float
+//        var Data: UsageData
     }
     
-    private static let API_Endpoint = "https://api-v1.smartsmilesticker.app/iOS/";
+    #if targetEnvironment(simulator)
+        private static let API_Endpoint = "http://192.168.1.49:8000/iOS/";
+        private static let API_ClientID = "ztuJ7pX3WJOzKXCPittDvR8Tn";
+    #else
+    private static let API_Endpoint: String = {
+        let v: String = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
+        return "https://api-v1.smartsmilesticker.app/iOS/\(v)"
+    }()
+//        private static let API_Endpoint = "https://api-v1.smartsmilesticker.app/iOS/" + Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String;
+        private static let API_ClientID = "I6hiRgR7a53wVOHXYYJx9yhbF";
+    #endif
+    
+    
+//    private static let API_Endpoint = "http://192.168.1.49:8000/iOS/";
     
     // MARK: View Lifecycles
     override func viewDidLoad() {
@@ -54,11 +87,13 @@ class ApiController : UIViewController {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(ApiController.API_ClientID, forHTTPHeaderField: "Authorization")
 
         do {
             let jsonData = try JSONEncoder().encode(usage)
             request.httpBody = jsonData
-            
+            print(usage)
+//            print(request.httpBody)
             // Perform HTTP Request
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                     

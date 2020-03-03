@@ -70,45 +70,6 @@ protocol ColorSelectorDelegate {
     func changeColor(color: UIColor)
 }
 
-//extension UIApplication {
-//
-//    func applicationVersion() -> String {
-//
-//        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-//    }
-//
-//    func applicationBuild() -> String {
-//
-//        return Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
-//    }
-//
-//    func versionBuild() -> String {
-//
-//        let version = self.applicationVersion()
-//        let build = self.applicationBuild()
-//
-////        return "\(version) (\(build)) \(gitHash)"
-//        return "\(version) (\(build))"
-//    }
-//
-//    func version() -> String {
-//        let dictionary = Bundle.main.infoDictionary!
-//        let version = dictionary["CFBundleShortVersionString"] as! String
-//        let build = dictionary["CFBundleVersion"] as! String
-//        return "\(version) build \(build)"
-//    }
-//
-//    func buildDate() -> String {
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateStyle = .medium
-//        dateFormatter.timeStyle = .none
-//        if let infoPath = Bundle.main.path(forResource: "Info", ofType: "plist"), let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath), let infoDate = infoAttr[.modificationDate] as? Date {
-//            return dateFormatter.string(from: infoDate)
-//        }
-//        return dateFormatter.string(from: Date())
-//    }
-//}
-
 class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate {
     
     func applicationVersion() -> String {
@@ -248,44 +209,33 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         
         let _ = Utils.SetupContraints(child: colorPickerViewController.view, parent: view, addToParent: false, topConstant: 5, topTarget: collectionView.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, centerX: true)
         
-        // long pressed
-//        stickerView.target(forAction: #selector(stickerViewSelected), withSender: nil)
+        let stickerTap = UITapGestureRecognizer(target: self, action: #selector(stickerViewSelected))
+        stickerView.addGestureRecognizer(stickerTap)
         
-//        let stickerTap = UITapGestureRecognizer(target: self, action: #selector(stickerViewSelected))
-//        stickerView.addGestureRecognizer(stickerTap)
-//        MSConversation.
-        
-//        activeConversation
+        let stickerLong = UILongPressGestureRecognizer(target: self, action: #selector(stickerViewSelected))
+        stickerView.addGestureRecognizer(stickerLong) // TODO: do different for long press....
     }
     
-    var currentConversation: MSConversation?
+//    var currentConversation: MSConversation?
     
     @objc func stickerViewSelected(){
         print("Tapped")
-        print(currentConversation as Any)
         if let convo = activeConversation {
-//            print(convo.remoteParticipantIdentifiers)
             if let sticker = stickerView.sticker {
                 convo.insert(sticker) { (e) in
-                    print(e as Any)
+//                    print(e as Any)
                     if e == nil {
-                        let data: ApiController.UsageData = ApiController.UsageData(
-                            color: ApiController.Color(uiColor: self.selectedColor),
-                            slider: self.slider.value
-                        )
                         let usage: ApiController.UsageModel = ApiController.UsageModel(
                             BundleID: Bundle.main.bundleIdentifier!,
                             AppVersion: self.applicationVersion(),
                             BuildNumber: self.applicationBuild(),
-                            Data: data
+                            color: self.selectedColor.hex(),
+                            // TODO device id
+                            slider: self.slider.value
+//                            Data: data
                         )
                         ApiController.SubmitReport(usage)
                     }
-//                    if e != nil {
-//                        convo.send(sticker) { (e1) in
-//                            print(e1)
-//                        }
-//                    }
                 }
                 
                 
@@ -307,19 +257,19 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
     
     // MARK: - Conversation Handling
     
-    override func willBecomeActive(with conversation: MSConversation) {
-        // Called when the extension is about to move from the inactive to active state.
-        // This will happen when the extension is about to present UI.
-        
-        // Use this method to configure the extension and restore previously stored state.
-        let stickerTap = UITapGestureRecognizer(target: self, action: #selector(stickerViewSelected))
-        stickerView.addGestureRecognizer(stickerTap)
-        
-        let stickerLong = UILongPressGestureRecognizer(target: self, action: #selector(stickerViewSelected))
-        stickerView.addGestureRecognizer(stickerLong) // TODO: do different for long press....
-        
-        currentConversation = conversation
-    }
+//    override func willBecomeActive(with conversation: MSConversation) {
+//        // Called when the extension is about to move from the inactive to active state.
+//        // This will happen when the extension is about to present UI.
+//
+//        // Use this method to configure the extension and restore previously stored state.
+//        let stickerTap = UITapGestureRecognizer(target: self, action: #selector(stickerViewSelected))
+//        stickerView.addGestureRecognizer(stickerTap)
+//
+//        let stickerLong = UILongPressGestureRecognizer(target: self, action: #selector(stickerViewSelected))
+//        stickerView.addGestureRecognizer(stickerLong) // TODO: do different for long press....
+//
+//        currentConversation = conversation
+//    }
     
     override func didResignActive(with conversation: MSConversation) {
         // Called when the extension is about to move from the active to inactive state.
