@@ -196,13 +196,13 @@ extension UIView: GADBannerViewDelegate /*, SKPaymentTransactionObserver*/ {
  */
     public func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
         print(error)
-        bannerView.backgroundColor = .white
-        
-        let adText = UILabel()
-        adText.text = "Please Support This App"
-        adText.textColor = .black
-        adText.textAlignment = .center
-        let _ = Utils.SetupContraints(child: adText, parent: bannerView)
+//        bannerView.backgroundColor = .white
+//        
+//        let adText = UILabel()
+//        adText.text = "Please Support This App"
+//        adText.textColor = .black
+//        adText.textAlignment = .center
+//        let _ = Utils.SetupContraints(child: adText, parent: bannerView)
     }
 }
 /*

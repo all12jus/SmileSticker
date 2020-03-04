@@ -8,6 +8,7 @@
 
 import UIKit
 import Messages
+import GoogleMobileAds
 
 extension MSSticker {
     convenience init(called description: String, from filename: String) {
@@ -29,7 +30,7 @@ class CollectionColorCell: UICollectionViewCell {
         let vw = UIView()
         vw.layer.borderColor = UIColor.label.cgColor
         vw.layer.borderWidth = 1
-        vw.layer.cornerRadius = 25
+        vw.layer.cornerRadius = 21 // was 25
         return vw
     }()
         
@@ -198,7 +199,7 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 1, left: 2, bottom: 1, right: 2)
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 50, height: 50)
+        layout.itemSize = CGSize(width: 42, height: 42) // was 50x50
         print(layout)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.clear
@@ -214,9 +215,11 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         stickerViewConstaints = Utils.SetupContraints(child: stickerView, parent: view, addToParent: false, top: true, topConstant: 4, leading: false, trailing: false, bottom: false, centerX: true, width: true, widthConstant: 100, height: true, heightConstant: 100)
 
         let padding = view.bounds.width/4
-        let _ = Utils.SetupContraints(child: slider, parent: view, addToParent: false, topConstant: 5, topTarget: stickerView.bottomAnchor, leading: true, leadingConstant: padding, trailing: true, trailingConstant: padding, bottom: false, centerX: true, height: true, heightConstant: 12)
+        let _ = Utils.SetupContraints(child: slider, parent: view, addToParent: false, topConstant: 5, topTarget: stickerView.bottomAnchor, leading: true, leadingConstant: padding, trailing: true, trailingConstant: padding, bottom: false, centerX: true
+            , height: true, heightConstant: 15
+        )
         
-        let _ = Utils.SetupContraints(child: collectionView, parent: view, addToParent: false, topConstant: 5, topTarget: slider.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, bottom: false, centerX: true, height: true, heightConstant: 60) // this shouldn't pin to bottom on expanded mode....
+        let _ = Utils.SetupContraints(child: collectionView, parent: view, addToParent: false, topConstant: 5, topTarget: slider.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, bottom: false, centerX: true, height: true, heightConstant: 45) // this shouldn't pin to bottom on expanded mode.... was 60
         
         let _ = Utils.SetupContraints(child: colorPickerViewController.view, parent: view, addToParent: false, topConstant: 5, topTarget: collectionView.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0,
                                       bottom: false,
@@ -225,7 +228,9 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         
         let adView = UIView()
         
-        let _ = Utils.SetupContraints(child: adView, parent: view, addToParent: true, top: true, topConstant: 5, topTarget: colorPickerViewController.view.bottomAnchor, leading: true, trailing: true, bottom: true, height: true, heightConstant: 102)
+        let _ = Utils.SetupContraints(child: adView, parent: view, addToParent: true, top: true, topConstant: 5, topTarget: colorPickerViewController.view.bottomAnchor, leading: true, trailing: true, bottom: true
+//            , height: true, heightConstant: 102
+        )
         
         let stickerTap = UITapGestureRecognizer(target: self, action: #selector(stickerViewSelected))
         stickerView.addGestureRecognizer(stickerTap)
@@ -233,8 +238,9 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         let stickerLong = UILongPressGestureRecognizer(target: self, action: #selector(stickerViewSelected))
         stickerView.addGestureRecognizer(stickerLong) // TODO: do different for long press....
         
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "d2edb294edfc15fbb05b34d319957267" ];
 //        view.injectAds()
-        adView.injectAds()
+//        adView.injectAds()
         colorPickerViewController.changeColor(color: selectedColor)
     }
     
