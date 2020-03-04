@@ -34,6 +34,9 @@ class ColorPickerViewController : UIViewController, ColorSelectorDelegate {
         // Update color
         color = .init(red: CGFloat(redSlider.value), green: CGFloat(greenSlider.value), blue: CGFloat(blueSlider.value), alpha: 1)
         colorDelegate?.changeColor(color: color)
+//        redView.backgroundColor = UIColor.init(red: 1, green: 0, blue: 0, alpha: CGFloat(redSlider.value))
+//        greenView.backgroundColor = UIColor.init(red: 0, green: 1, blue: 0, alpha: CGFloat(greenSlider.value))
+//        blueView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 1, alpha: CGFloat(blueSlider.value))
     }
     
     let redSlider: UISlider = {
@@ -73,6 +76,10 @@ class ColorPickerViewController : UIViewController, ColorSelectorDelegate {
         redSlider.value = Float(r)
         greenSlider.value = Float(g)
         blueSlider.value = Float(b)
+        
+        redView.backgroundColor = UIColor.init(red: 1, green: 0, blue: 0, alpha: CGFloat(redSlider.value))
+        greenView.backgroundColor = UIColor.init(red: 0, green: 1, blue: 0, alpha: CGFloat(greenSlider.value))
+        blueView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 1, alpha: CGFloat(blueSlider.value))
     }
     
     func getSliderView(slider: UISlider, colorText: String, color: UIColor) -> UIView {
@@ -88,19 +95,43 @@ class ColorPickerViewController : UIViewController, ColorSelectorDelegate {
         return vw
     }
     
-    // MARK: View Lifecycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let redView: UIView = getSliderView(slider: redSlider, colorText: "R", color: .red)
-        let greenView: UIView = getSliderView(slider: greenSlider, colorText: "G", color: .green)
-        let blueView: UIView = getSliderView(slider: blueSlider, colorText: "B", color: .blue)
+    var redView: UIView = UIView()
+    var greenView: UIView = UIView()
+    var blueView: UIView = UIView()
+    
+    lazy var vw: UIView = {
+        redView = getSliderView(slider: redSlider, colorText: "R", color: .red)
+        greenView = getSliderView(slider: greenSlider, colorText: "G", color: .green)
+        blueView = getSliderView(slider: blueSlider, colorText: "B", color: .blue)
         
         let stackView = UIStackView(arrangedSubviews: [redView, greenView, blueView])
         stackView.alignment = .fill
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
-        let _ = Utils.SetupContraints(child: stackView, parent: view)
+        
+        return stackView
+    }()
+    
+    // MARK: View Lifecycles
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        redView.backgroundColor = UIColor.init(red: 1, green: 0, blue: 0, alpha: CGFloat(redSlider.value))
+        greenView.backgroundColor = UIColor.init(red: 0, green: 1, blue: 0, alpha: CGFloat(greenSlider.value))
+        blueView.backgroundColor = UIColor.init(red: 0, green: 0, blue: 1, alpha: CGFloat(blueSlider.value))
+        
+//        let redView: UIView = getSliderView(slider: redSlider, colorText: "R", color: .red)
+//        let greenView: UIView = getSliderView(slider: greenSlider, colorText: "G", color: .green)
+//        let blueView: UIView = getSliderView(slider: blueSlider, colorText: "B", color: .blue)
+//
+//        let stackView = UIStackView(arrangedSubviews: [redView, greenView, blueView])
+//        stackView.alignment = .fill
+//        stackView.axis = .vertical
+//        stackView.distribution = .fillEqually
+        
+        
+        let _ = Utils.SetupContraints(child: vw, parent: view)
+//        let _ = Utils.SetupContraints(child: stackView, parent: view)
     }
     
 }

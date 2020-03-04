@@ -50,7 +50,18 @@ class CollectionColorCell: UICollectionViewCell {
 class TableController : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     public let cellId = "Cell"
     public var colorDelegate: ColorSelectorDelegate?
-    let colors:[UIColor] = [UIColor.black, UIColor.white, UIColor.red, UIColor.blue, UIColor.green, UIColor.yellow, UIColor.purple]
+    let colors:[UIColor] = [
+//        UIColor.black,
+//        UIColor.white,
+        UIColor.red,
+        UIColor.blue,
+        UIColor.green,
+        UIColor.yellow,
+        UIColor.purple,
+        UIColor.cyan,
+        UIColor.magenta,
+        UIColor.orange
+    ]
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return colors.count
     }
@@ -203,17 +214,28 @@ class MessagesViewController: MSMessagesAppViewController, ColorSelectorDelegate
         stickerViewConstaints = Utils.SetupContraints(child: stickerView, parent: view, addToParent: false, top: true, topConstant: 4, leading: false, trailing: false, bottom: false, centerX: true, width: true, widthConstant: 100, height: true, heightConstant: 100)
 
         let padding = view.bounds.width/4
-        let _ = Utils.SetupContraints(child: slider, parent: view, addToParent: false, topConstant: 5, topTarget: stickerView.bottomAnchor, leading: true, leadingConstant: padding, trailing: true, trailingConstant: padding, bottom: false, centerX: true)
+        let _ = Utils.SetupContraints(child: slider, parent: view, addToParent: false, topConstant: 5, topTarget: stickerView.bottomAnchor, leading: true, leadingConstant: padding, trailing: true, trailingConstant: padding, bottom: false, centerX: true, height: true, heightConstant: 12)
         
         let _ = Utils.SetupContraints(child: collectionView, parent: view, addToParent: false, topConstant: 5, topTarget: slider.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, bottom: false, centerX: true, height: true, heightConstant: 60) // this shouldn't pin to bottom on expanded mode....
         
-        let _ = Utils.SetupContraints(child: colorPickerViewController.view, parent: view, addToParent: false, topConstant: 5, topTarget: collectionView.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0, centerX: true)
+        let _ = Utils.SetupContraints(child: colorPickerViewController.view, parent: view, addToParent: false, topConstant: 5, topTarget: collectionView.bottomAnchor, leading: true, leadingConstant: 0, trailing: true, trailingConstant: 0,
+                                      bottom: false,
+//                                      bottom: true, bottomConstant: -150, bottomTarget: view.safeAreaLayoutGuide.bottomAnchor,
+                                      centerX: true)
+        
+        let adView = UIView()
+        
+        let _ = Utils.SetupContraints(child: adView, parent: view, addToParent: true, top: true, topConstant: 5, topTarget: colorPickerViewController.view.bottomAnchor, leading: true, trailing: true, bottom: true, height: true, heightConstant: 102)
         
         let stickerTap = UITapGestureRecognizer(target: self, action: #selector(stickerViewSelected))
         stickerView.addGestureRecognizer(stickerTap)
         
         let stickerLong = UILongPressGestureRecognizer(target: self, action: #selector(stickerViewSelected))
         stickerView.addGestureRecognizer(stickerLong) // TODO: do different for long press....
+        
+//        view.injectAds()
+        adView.injectAds()
+        colorPickerViewController.changeColor(color: selectedColor)
     }
     
 //    var currentConversation: MSConversation?
